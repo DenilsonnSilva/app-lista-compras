@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c7962360-f658-4c99-8c29-12352064eef4"
+      }
+    },
+    "owner": "denilsonnsilva"
   }
 }

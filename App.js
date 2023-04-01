@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StatusBar, SafeAreaView, FlatList } from "react-native";
+import ShoppingListItem from "./components/ShoppingListItem";
+import AddShoppingItem from "./components/AddShoppingItem";
+import useStore from "./Store";
 
-export default function App() {
+export default App = () => {
+  const shoppingList = useStore((state) => state.shoppingList);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+      }}
+    >
+      <FlatList
+        renderItem={({ item }) => <ShoppingListItem item={item} />}
+        data={shoppingList}
+        keyExtractor={(item) => item.name}
+        ListHeaderComponent={<AddShoppingItem />}
+        keyboardShouldPersistTaps="handled"
+      />
+    </SafeAreaView>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};
